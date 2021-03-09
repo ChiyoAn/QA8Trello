@@ -4,30 +4,31 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class LoginTests {
+public class LoginTests extends TestBase {
    WebDriver driver = new ChromeDriver();
+
 
    @BeforeMethod
    public void initTest() throws InterruptedException {
 
+//----Driver initialization. Open Trello application
+
        driver.get("https://trello.com/");
        Thread.sleep(2000);
-
-
-
-   }
-
-   @Test
-   public void applicationTest(){
-       System.out.println("Title " + driver.getTitle());
-
+       WebElement loginIncon = driver.findElement(By.xpath(" //a[contains(text(),'Войти')]"));
+       loginIncon.click();
+       Thread.sleep(5000);
 
 
    }
+
+
 
 
 
@@ -36,9 +37,7 @@ public class LoginTests {
     @Test
     public void loginNegativeLoginIncorrect() throws InterruptedException {
 
-        WebElement loginIncon = driver.findElement(By.xpath(" //a[contains(text(),'Войти')]"));
-        loginIncon.click();
-        Thread.sleep(5000);
+
         WebElement loginField = driver.findElement(By.xpath("//input[@id='user']"));
         fillField(loginField, "123");
         Thread.sleep(2000);
@@ -57,9 +56,7 @@ public class LoginTests {
     @Test
     public void loginPositiveTest() throws InterruptedException {
 
-        WebElement loginIncon = driver.findElement(By.xpath(" //a[contains(text(),'Войти')]"));
-        loginIncon.click();
-        Thread.sleep(5000);
+
         WebElement loginField = driver.findElement(By.xpath("//input[@id='user']"));
         fillField(loginField, "obertbd@gmail.com");
         Thread.sleep(2000);
@@ -77,9 +74,7 @@ public class LoginTests {
     }
     @Test
     public void loginWithNotCorrectPassword() throws InterruptedException {
-        WebElement loginIncon = driver.findElement(By.xpath(" //a[contains(text(),'Войти')]"));
-        loginIncon.click();
-        Thread.sleep(5000);
+
         WebElement loginField = driver.findElement(By.xpath("//input[@id='user']"));
         fillField(loginField, "obertbd@gmail.com");
         Thread.sleep(2000);
@@ -94,6 +89,7 @@ public class LoginTests {
         System.out.println("Error2 " + driver.findElement(By.xpath("//body/div[1]/section[1]/div[1]/div[1]/div[3]/p[1]")).getText() );
 
         Thread.sleep(2000);
+        
 
 
 
@@ -105,19 +101,13 @@ public class LoginTests {
 
 
 
-    @AfterMethod
-    public void tearDown(){
-       driver.quit();
 
 
 
-    }
 
-    public void fillField(WebElement element, String value) {
-        element.clear();
-        element.click();
-        element.sendKeys(value);
-    }
+
+
+
 
 
 

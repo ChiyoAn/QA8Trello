@@ -2,9 +2,11 @@ package tests;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -56,8 +58,69 @@ public class CurrentBoardTests extends TestBase {
 
     }
 
+    @Test
+    public void changeListName() throws InterruptedException {
+
+        WebElement listName = driver.findElement(By.xpath("//textarea[@class= 'list-header-name mod-list-name js-list-name-input']"));
+        WebElement listField = driver.findElement(By.xpath("//div[@class ='list-header-target js-editing-target']"));
+        //Assert.assertEquals("titleList", listName.getText(),"all ok");
+
+        if(listName.getText().equals("titleList")){
+            System.out.println(listName.getText());
+            Thread.sleep(2000);
+            listField.click();
+            listName.sendKeys("newList");
+            listName.sendKeys(Keys.ENTER);
 
 
+
+
+
+        } else
+        {
+
+            createNewList();
+            changeListName();
+        }
+        Thread.sleep(2000);
+
+
+
+    }
+
+
+
+        @Test
+        public void createNewCard() throws InterruptedException {
+            WebElement listName = driver.findElement(By.xpath("//textarea[@class= 'list-header-name mod-list-name js-list-name-input']"));
+            WebElement addCard = driver.findElement(By.xpath("//span[@class='js-add-a-card']"));
+            //WebElement addCardButton = driver.findElement(By.xpath("//input[@value='Add Card']"));
+            if(listName.getText().equals("titleList")){
+
+
+                System.out.println("working");
+                addCard.click();
+                Thread.sleep(2000);
+                WebElement cardField = driver.findElement(By.xpath("//textarea[@class='list-card-composer-textarea js-card-title']"));
+                cardField.sendKeys("cardName");
+                Thread.sleep(2000);
+                cardField.sendKeys(Keys.ENTER);
+                Thread.sleep(3000);
+
+
+            } else{
+                createNewList();
+                changeListName();
+            }
+
+
+
+
+
+
+
+
+        }
 
 
 

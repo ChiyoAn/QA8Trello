@@ -86,13 +86,9 @@ public class LoginTests extends TestBase {
 
 
         System.out.println("Error: " + driver.findElement(By.className("forgotLink")).getText());
-        System.out.println("Error2 " + driver.findElement(By.xpath("//body/div[1]/section[1]/div[1]/div[1]/div[3]/p[1]")).getText() );
+        System.out.println("Error2 " + driver.findElement(By.xpath("//p[@class='error-message']")).getText() );
 
         Thread.sleep(2000);
-        
-
-
-
 
 
     }
